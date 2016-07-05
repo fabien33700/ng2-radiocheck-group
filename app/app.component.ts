@@ -1,80 +1,106 @@
 import { Component } from '@angular/core';
 import { RadioGroup } from './radio-group';
+import { CheckGroup } from './check-group';
 
-class Personne {
-    private nom: string;
-    private prénom: string;
+class Person {
+    private lastname: string;
+    private firstname: string;
 
-    constructor(nom: string, prénom: string) {
-        this.nom = nom;
-        this.prénom = prénom;
+    constructor(lastname: string, firstname: string) {
+        this.lastname = lastname;
+        this.firstname = firstname;
     }
     
-    public getNom() { return this.nom; }
-    public getPrenom() { return this.prénom; }
-
-    public uneMethodePersonnelle() {
-        alert("Je commence mon traitement sur " + Personne.capitale(this.prénom) + " !");
-    }
+    public getLastname() { return this.lastname; }
+    public getFirstname() { return this.firstname; }
 
     public toString() {
-        return this.nom.toUpperCase() + " " + Personne.capitale(this.prénom);
+        return this.lastname.toUpperCase() + " " + Person.capitalize(this.firstname);
     }
 
-    static capitale(chaine) {
-        return chaine.substring(0, 1).toUpperCase() + chaine.substring(1);
+    static capitalize(text) {
+        return text.substring(0, 1).toUpperCase() + text.substring(1);
     }
 }
 
 @Component({
   selector: 'my-app',
   template: `
-    <h1>Liste de personnes</h1>
+    <h1>People list</h1>
     <form>
       <radio-group 
-        (changed)="onChange($event)" 
-        [name]="choixPersonne" 
-        [items]="listePersonnes" 
+        (changed)="onRadioChange($event)" 
+        [name]="personChoice" 
+        [items]="personList" 
         [initial]="2">
       </radio-group>
     </form>
 
-    Personne sélectionnée : {{ choix }} <hr>
+    Selected person : {{ personChoice }} <br>
 
-    Nom : <input type="text" [(ngModel)]="nouveauNom">
- Prénom : <input type="text" [(ngModel)]="nouveauPrenom">
-    <button (click)="ajouter()">Ajouter</button><hr>
+    Last name  : <input type="text" [(ngModel)]="newLastname">
+    First name : <input type="text" [(ngModel)]="newFirstname">
+    <button (click)="addPerson()">Add a new person</button>
+    
+    <hr>
+
+    <form>
+      <check-group 
+        (changed)="onCheckChange($event)"
+        [name]="skillChoices" 
+        [items]="skillList"
+        [initial]="[1, 4]">
+      </check-group>
+    </form>
+
+    Selected skills : 
+    <ul>
+        <li *ngFor="let skill of skillChoices">{{ skill }}</li>
+    </ul>
+
+    <input type="text" [(ngModel)]="newSkill">
+    <button (click)="addSkill()">Add a new skill</button>
   `,
-  directives: [RadioGroup]
+  directives: [RadioGroup, CheckGroup]
 })
 export class AppComponent {
-    listePersonnes: Array<Personne> = [
-      new Personne('dupont', 'josé'),
-      new Personne('gallant', 'marion'),
-      new Personne('pitard', 'fabrice'),
+    personList: Array<Person> = [
+      new Person('Howard', 'Benjamin'),
+      new Person('Singleton', 'Kate'),
+      new Person('Pierce', 'Julia'),
+      new Person('Bauer', 'Michael')
     ];
 
-   /* listeCompetences: Array<string> = [
+   skillList: Array<string> = [
         'Management',
-        'Relations clients',
-        'Affaires',
+        'Client relationship',
+        'Business',
         'R & D',
-        'Comptabilité et C.A',
-        'Communications',
-        'Ressources humaines'
-    ];*/
+        'Accounting',
+        'Communication',
+        'Human ressources'
+    ];
 
-    choix: Personne;
-    //selection: Array<string>;
+    personChoice: Person;
+    skillChoices: Array<string>;
 
-    nouveauNom: string;
-    nouveauPrenom: string;
+    newLastname: string;
+    newFirstname: string;
+    newSkill: string;
 
-    onChange(event) {
-        this.choix = event.value;
+    onRadioChange(event) {
+        this.personChoice = event.value;
     }
 
-    ajouter() {
-        this.listePersonnes.push(new Personne(this.nouveauNom, this.nouveauPrenom));
+    onCheckChange(event) {
+        this.skillChoices = event.values;
+    }
+
+    addPerson() {
+        this.personList.push(new Person(this.newLastname, this.newFirstname));
+    }
+
+    addSkill() {
+        this.skillList.push(this.newSkill);
     }
 }
