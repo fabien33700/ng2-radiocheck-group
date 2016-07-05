@@ -1,7 +1,7 @@
 {
   "name": "ng2-radiocheck-group",
   "description": "Radio group & checkboxes group components for Angular 2.x, with an example",
-  "main": "main.ts",
+  "main": "index.html",
   "authors": [
     "fabien33700 <fabien.lehouedec@gmail.com>"
   ],

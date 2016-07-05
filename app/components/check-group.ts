@@ -11,15 +11,19 @@ import { ToggleMap } from './toggle-map';
 @Component({
   selector: 'check-group',
   template: `
-    <div *ngFor="let item of items; let i = index" class="form-group">
-        <input #c 
-            (click)="changeHandler([c.value])" 
-            [name]="name"
-            [checked]="isChecked(i)"
-            [value]="i"
-            type="checkbox" class="form-control">
-        {{ getItemCaption(item) }} {{i}}
-    </div> 
+    <form>
+        <div *ngFor="let item of items; let i = index" class="checkbox">
+            <label>
+                <input #c 
+                    (click)="changeHandler([c.value])" 
+                    [name]="name"
+                    [checked]="isChecked(i)"
+                    [value]="i"
+                    type="checkbox">
+                {{ getItemCaption(item) }}
+            </label>
+        </div> 
+    </form>
   `
 })
 export class CheckGroup {
@@ -50,8 +54,8 @@ export class CheckGroup {
         let present = this.selected.toggle(index);
 
         let event = {
-            indexes: this.getSelectedIds(),
-             values: this.getSelectedItems()
+            indexes: this.selected.indexes(true),
+             values: this.selected.items(true)
         };
         
         this.changed.emit(event);
@@ -62,21 +66,9 @@ export class CheckGroup {
         return this.selected.indexes(true).indexOf(index) > -1;
     }
 
-    /*private setInitial(indexes: Array<number>) {
-        indexes.map(this.changeHandler);
-    }*/
-
     private getItemCaption(item) {
         return (typeof item === "object") ?
             item.toString() : 
             item;
-    }
-
-    getSelectedIds(): Array<number> {
-        return this.selected.indexes(true);
-    }
-
-    getSelectedItems() {
-        return this.selected.items(true);
     }
 }

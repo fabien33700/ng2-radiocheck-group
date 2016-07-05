@@ -1,0 +1,75 @@
+<section id="main" class="container">
+    <div class="row header">
+        <div class="col-md-12">
+            <h1>ng2-radio/checkbox-group</h1>
+            <h3>Radiobutton and checkboxes group components for Angular 2.x</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            <div class="row">
+                <h1>People list</h1>
+                <hr>
+                <radio-group 
+                    (changed)="onRadioChange($event)" 
+                    [name]="personChoice" 
+                    [items]="personList" 
+                    [initial]="2">
+                    </radio-group>
+            </div>
+
+            <div class="row">
+                <div class="well well-sm"><b>Selected person :</b> {{ personChoice }}</div>
+
+                <form class="form">
+                    <div class="control-group">
+                        <label class="control-label" for="first">First Name</label>
+                        <div class="controls">
+                            <input type="text" [(ngModel)]="newFirstname" class="form-control" placeholder="First name">
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="control-group">
+                        <label class="control-label" for="lastname">Last Name</label>
+                        <div class="controls">
+                            <input type="text" [(ngModel)]="newLastname" class="form-control" placeholder="Last name">
+                        </div>
+                    </div>
+                </form>
+
+                <button (click)="addPerson()" class="btn btn-success">Add a new person</button>
+            </div>
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            <div class="row">
+                <h1>Skills list</h1>
+                <hr>
+                <check-group 
+                    (changed)="onCheckChange($event)"
+                    [name]="skillChoices" 
+                    [items]="skillList">
+                    </check-group>
+            </div>
+
+            <div class="row">
+                <div class="well well-sm"><b>Selected skills ({{ skillCount() }} items) : </b>{{ skillChoices }}</div>
+
+                <form class="form">
+                    <div class="control-group">
+                        <label class="control-label" for="first">Skill</label>
+                        <div class="controls">
+                            <input type="text" [(ngModel)]="newSkill" class="form-control" placeholder="new skill">
+                        </div>
+                    </div>
+                </form>
+
+                <button class="btn btn-primary" (click)="addSkill()">Add a new skill</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <hr>ng2-radiocheck-group is designed by &lt;fabien33700&gt; &ndash; <a href="https://github.com/fabien33700">See on Github</a> &ndash; under ISC License &ndash; with Angular 2
+</footer>

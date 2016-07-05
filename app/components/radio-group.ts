@@ -9,15 +9,19 @@ import {
 @Component({
   selector: 'radio-group',
   template: `
-    <div *ngFor="let item of items; let i = index" class="form-group">
-        <input #r 
-            (click)="changeHandler(r.value, r)" 
-            [name]="name"
-            [checked]="initial == i" 
-            [value]="i"
-            type="radio" class="form-control">
-        {{ getItemCaption(item) }}
-    </div> 
+    <form>
+        <div *ngFor="let item of items; let i = index" class="radio">
+            <label>
+                <input #r 
+                    (click)="changeHandler(r.value, r)" 
+                    [name]="name"
+                    [checked]="initial == i" 
+                    [value]="i"
+                    type="radio">
+                {{ getItemCaption(item) }}
+            </label>
+        </div> 
+    </form>
   `
 })
 export class RadioGroup {
