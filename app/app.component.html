@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-md-5 col-md-offset-1">
             <div class="row">
-                <h1>People list</h1>
+                <h1>People list <span class="badge">radio-group</span></h1>
                 <hr>
                 <radio-group 
                     (changed)="onRadioChange($event)" 
@@ -19,7 +19,7 @@
             </div>
 
             <div class="row">
-                <div class="well well-sm"><b>Selected person :</b> {{ personChoice }}</div>
+                <div class="well well-sm"><b>Selected person :</b> {{ personChoice.introduce() }}</div>
 
                 <form class="form">
                     <div class="control-group">
@@ -43,7 +43,7 @@
         </div>
         <div class="col-md-5 col-md-offset-1">
             <div class="row">
-                <h1>Skills list</h1>
+                <h1>Skills list <span class="badge">check-group</span></h1>
                 <hr>
                 <check-group 
                     (changed)="onCheckChange($event)"
@@ -71,5 +71,5 @@
 </section>
 
 <footer>
-    <hr>ng2-radiocheck-group is designed by &lt;fabien33700&gt; &ndash; <a href="https://github.com/fabien33700">See on Github</a> &ndash; under ISC License &ndash; with Angular 2
+    <hr>ng2-radiocheck-group is designed by &lt;fabien33700&gt; &ndash; <a href="https://github.com/fabien33700">See on Github</a> &ndash; under MIT License &ndash; with Angular 2
 </footer>

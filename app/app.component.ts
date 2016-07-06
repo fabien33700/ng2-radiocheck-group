@@ -12,10 +12,10 @@ import { Person } from './person';
 })
 export class AppComponent {
     personList: Array<Person> = [
-      new Person('Howard', 'Benjamin'),
-      new Person('Singleton', 'Kate'),
-      new Person('Pierce', 'Julia'),
-      new Person('Bauer', 'Michael')
+      new Person('Howard', 'Benjamin', 35),
+      new Person('Singleton', 'Kate', 23),
+      new Person('Pierce', 'Julia', 26),
+      new Person('Bauer', 'Michael', 44)
     ];
 
    skillList: Array<string> = [
@@ -47,8 +47,12 @@ export class AppComponent {
         this.skillChoices = event.values;
     }
 
+    randomAge() {
+        return Math.round((Math.random() * 10) + 20);
+    }
+
     addPerson() {
-        this.personList.push(new Person(this.newLastname, this.newFirstname));
+        this.personList.push(new Person(this.newLastname, this.newFirstname, this.randomAge()));
     }
 
     addSkill() {
